@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>TikTok connected</title>
+<body style="font-family:system-ui;max-width:640px;margin:40px auto;padding:0 16px;line-height:1.5">
+<h1 id="h">Connecting TikTok…</h1>
+<p id="p"></p>
+<p><code id="c" style="display:block;word-break:break-all;padding:12px;background:#f3f3f3;border-radius:8px"></code></p>
+<button id="b" hidden onclick="navigator.clipboard.writeText(document.getElementById('c').textContent);this.textContent='Copied'">Copy code</button>
+<script>
+const q = new URLSearchParams(location.search);
+if (q.get("code")) {
+  document.getElementById("h").textContent = "Almost done";
+  document.getElementById("p").textContent = "Copy this one-time code and paste it into the terminal that is waiting for it. It expires in a few minutes.";
+  document.getElementById("c").textContent = q.get("code");
+  document.getElementById("b").hidden = false;
+} else {
+  document.getElementById("h").textContent = "TikTok didn't connect";
+  document.getElementById("p").textContent = q.get("error_description") || q.get("error") || "No code was returned.";
+}
+history.replaceState(null, "", location.pathname);
+</script>
+</body>
